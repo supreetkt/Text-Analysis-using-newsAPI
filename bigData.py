@@ -43,10 +43,10 @@ sc = spark.sparkContext
 #                     StructField('urltoimage', StringType(), True) ])
 
 # newsData = spark.read.csv('/Users/vishalshukla/Downloads/news.csv', schema)
-df_input.createOrReplaceTempView('newsdata')
-df_input = spark.sql('''SELECT * from newsdata
-WHERE source in ('engadget', 'hacker-news', 'techcrunch', 'techradar', 'the-verge')
-''')
+# newsData.createOrReplaceTempView('newsdata')
+# df_input = spark.sql('''SELECT * from newsdata
+# WHERE source in ('engadget', 'hacker-news', 'techcrunch', 'techradar', 'the-verge')
+# ''')
 
 '''
 ('bbc-news', 'cnbc', 'cnn', 'the-new-york-times', 'the-wall-street-journal', 'the-huffington-post', 'the-washington-post')
@@ -64,7 +64,6 @@ business
 
 '''
 
-print(df_input.show())
 
 english_stopwords = get_stop_words(language='english') #stopwords.words("english")
 english_stopwords+=stplist
@@ -120,7 +119,7 @@ zipperUDF = udf(zipTermsWeights, StringType())
 
 
 def cleanUp(text):
-    # nltk.data.path.append('/home/vshukla/nltk_data')
+    nltk.data.path.append('/home/vshukla/nltk_data')
     # Removing all special characters / non-alphanumeric characters
     text = re.sub('\W+', ' ', str(text))
     # Removing digits, converting to lowercase
